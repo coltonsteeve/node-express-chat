@@ -9,7 +9,7 @@ body {
 }
 
 form {
-  background: #000;
+  /*background: #000;*/
   padding: 3px;
   position: fixed;
   bottom: 0;
@@ -20,12 +20,13 @@ form input {
   border: 0;
   padding: 10px;
   margin-right: .5%;
+  margin-left: 0%;
   width: 90%;
 }
 
 form #button {
   color: #FFF;
-  background: #2D9F0B;
+  background: #4F94CD;
   border: none;
   padding: 10px;
   width: 9%;
@@ -35,6 +36,7 @@ form #button {
   list-style-type: none;
   margin: 0;
   padding: 0;
+  margin-bottom: 7%;
 }
 
 #messages li {
@@ -51,4 +53,24 @@ form #button {
   width: 100%;
 }
 
+
+@media screen and (max-width: 600px) {
+  form {
+    height: 8%;
+  }
+  
+  form input {
+    height: 100%;
+    width: 85%;
+  }
+
+  form #button {
+    width: 14%;
+  }
+
+  #messages li {
+    font-size: 1em;
+  }
+
+}
 /* Reference: http://javabeginnerstutorial.com/javascript-2/create-simple-chat-application-using-node-js-express-js-socket-io/ */

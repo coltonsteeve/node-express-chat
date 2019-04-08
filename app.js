@@ -4,9 +4,19 @@ const app = express()  // create an Express web app
 const server = http.createServer(app)  // pass in the Express app to our http server
 const io = require('socket.io')(server) // pass in our server to get a Socket.io server
 const path = require('path')
+const dotenv = require('dotenv')
 
-const hostname = '0.0.0.0'    // allows access from remote computers
-const port = 3003;
+/*const hostname = '0.0.0.0'    // allows access from remote computers
+const port = 3003;*/
+
+// Load environment variables from .env file, where port, API keys, and passwords are configured.
+dotenv.config({ path: '.env' })
+console.log('Environment variables loaded into process.env.')
+
+// configure app.settings.............................
+//app.set('port', process.env.PORT )
+app.set('port', process.env.PORT )
+app.set('host', process.env.HOST )
 
 // By default, Express does not serve static files. 
 // Configure middleware with app.use
@@ -28,7 +38,15 @@ io.on('connection', (socket) => {
   })
 })
 
-server.listen(port, hostname, () => {
+/*server.listen(port, hostname, () => {
   // Tell the user where to find the app (use backtics with variables)
   console.log(`Server running at http://${hostname}:${port}/`)
-})
+})*/
+
+// start Express app
+server.listen(app.get('port'), () => {
+  console.log('App is running at http://localhost:%d in %s mode', app.get('port'), app.get('env'))
+  console.log(' Press CTRL-C to stop\n')
+  })
+
+module.exports = app

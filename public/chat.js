@@ -14,6 +14,9 @@ window.addEventListener('load', () => {
   // configure event listeners (use action - NOT ON action)......
   formElement.addEventListener('submit', submitfunction);   // onsubmit = "return submitfunction();"
   messageElement.addEventListener('keyup', notifyTyping);   // onkeyup = "notifyTyping();"
+  /*formElement.addEventListener('submit', function(){
+    insertImage();
+  });*/
 
   // additional initialization.........
   const name = makeid();
@@ -27,10 +30,11 @@ window.addEventListener('load', () => {
 // utility function to create a new random user name....
 function makeid() {
   let text = ''
-  const possible = 'abcdeghijklmnoprstuwxy'
+  text = prompt("What is your name?");
+  /*const possible = 'abcdeghijklmnoprstuwxy'
   for (let i = 0; i < 5; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
-  }
+  }*/
   return text
 }
 
@@ -38,10 +42,33 @@ function makeid() {
 // emit a new chatMessage event from the client......
 function submitfunction() {
   let from = $('#user').val()
-  const message = $('#m').val()
+  let message = $('#m').val()
   if (message !== '') {
-    socket.emit('chatMessage', from, message)
+    if (message.indexOf("/image") == 0) {
+      message = message.substring(6,message.length);
+      message = '<img src="' + message + '" height=50% width=50%>';
+      socket.emit('chatMessage', from, message);
+    }
+    else if (message.indexOf("/link") == 0) {
+      message = message.substring(5,message.length);
+      message = '<a href="' + message + '">' + message + '</a>';
+      socket.emit('chatMessage', from, message); 
+    }
+    else if (message.indexOf("/bold") == 0) {
+      message = message.substring(5,message.length);
+      message = '<b>' + message + '</b>';
+      socket.emit('chatMessage', from, message); 
+    }
+    else if (message.indexOf("/big") == 0) {
+      message = message.substring(4,message.length);
+      message = '<h1>' + message + '</h1>';
+      socket.emit('chatMessage', from, message);
+    }
+    else {
+      socket.emit('chatMessage', from, message);
+    }
   }
+    
   // what language and selector is used below?
   // set the value to an empty string and
   // focus on the message box again
@@ -54,6 +81,13 @@ function notifyTyping() {
   let user = $('#user').val()
   socket.emit('notifyUser', user)
 }
+
+//Insert Image
+/*function insertImage() {
+  if ($("input:first").val() === "Hello") {
+    alert("Hello");
+  }
+}*/
 
 // how to react to a chatMessage event.................
 socket.on('chatMessage', function (from, msg) {

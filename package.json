@@ -4,7 +4,8 @@
   "description": "Simple Express Chat app",
   "main": "app.js",
   "dependencies": {
-    "express": "latest",
+    "dotenv": "^7.0.0",
+    "express": "^4.16.4",
     "socket.io": "latest"
   },
   "scripts": {
@@ -21,7 +22,7 @@
     "Express.js",
     "web",
     "chat",
-    "app", 
+    "app",
     "jQuery"
   ],
   "author": "Denise Case",
