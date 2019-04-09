@@ -86,7 +86,7 @@ function notifyTyping() {
 // how to react to a chatMessage event.................
 socket.on('chatMessage', function (from, msg) {
   const me = $('#user').val()
-  const color = (from === me) ? 'green' : '#009afd'
+  const color = (from === me) ? '#2979FF' : 'black'
   from = (from === me) ? 'Me' : from
   $('#messages').append('<li><b style="color:' + color + '">' + from + '</b>: ' + msg + '</li>')
 })
@@ -100,6 +100,22 @@ socket.on('notifyUser', function (user) {
   // 10 seconds after typing stops, set the notify text to an empty string
   setTimeout(function () { $('#notifyUser').text('') }, 10000)
 })
+
+var m = document.getElementById('m');
+var button = document.getElementById('button');
+
+var x = window.matchMedia("(max-width: 600px)")
+m.addEventListener('focus', function(){
+  if (x.matches) {
+    button.style.marginBottom = '9.2%';
+  }
+});
+
+m.addEventListener('blur', function(){
+  if (x.matches) {
+    button.style.marginBottom = '2%';
+  }
+});
 
 
 

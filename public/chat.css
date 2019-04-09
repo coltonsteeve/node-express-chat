@@ -21,7 +21,7 @@ form input {
   padding: 10px;
   margin-right: .5%;
   margin-left: 0%;
-  width: 95%;
+  width: 95.5%;
   font-size: 100%;
 }
 
@@ -39,10 +39,10 @@ form #button {
   /*padding: 10px;*/
   padding: 0px;
   /*width: 9%;*/
-  height: 1.9em;
+  height: 8%;
   width: auto;
   bottom: 0;
-  margin-bottom: 1px;
+  margin-bottom: 2px;
   position: fixed;
 }
 
@@ -58,9 +58,9 @@ form #button {
   padding: 5px 10px;
 }
 
-#messages li:nth-child(odd) {
+/*#messages li:nth-child(odd) {
   background: #eee;
-}
+}*/
 
 #notifyUser {
   position: fixed;
@@ -76,7 +76,7 @@ form #button {
   
   form input {
     height: 100%;
-    width: 85%;
+    width: 87%;
   }
 
   form input:focus {
@@ -85,7 +85,9 @@ form #button {
 
 
   form #button {
-    width: 14%;
+    height: 6%;
+    width: auto;
+    margin-bottom: 2%;
   }
 
   #messages li {

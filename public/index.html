@@ -3,10 +3,10 @@
 
 <head>
   <title>Chat</title>
-  <link rel='stylesheet' href='public/chat.css' />
+  <link rel='stylesheet' href='/public/chat.css' />
   <script src="/socket.io/socket.io.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="public/chat.js"></script>
+  
   <meta content="width=device-width, initial-scale=1" name="viewport" />
 </head>
 
@@ -18,12 +18,11 @@
   <section id="chatsection">
   <form id="chatform" onsubmit="return(false)">
     <input type="hidden" id="user" value="" />
-    <div id="container">
     <input id="m" autocomplete="off" placeholder="Type your message here.." />
     <input name="submit" type="image" src="../public/icons/send.png" id="button" alt="Place Order" />
-    </div>
   </form>
 </section>
+<script src="/public/chat.js"></script>
 </body>
 
 </html>
