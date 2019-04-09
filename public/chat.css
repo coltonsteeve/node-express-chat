@@ -22,6 +22,12 @@ form input {
   margin-right: .5%;
   margin-left: 0%;
   width: 90%;
+  font-size: 100%;
+}
+
+input, textarea {
+  -webkit-appearance: none;
+  -webkit-border-radius: 0;
 }
 
 form #button {
