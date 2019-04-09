@@ -82,12 +82,6 @@ function notifyTyping() {
   socket.emit('notifyUser', user)
 }
 
-//Insert Image
-/*function insertImage() {
-  if ($("input:first").val() === "Hello") {
-    alert("Hello");
-  }
-}*/
 
 // how to react to a chatMessage event.................
 socket.on('chatMessage', function (from, msg) {
@@ -106,6 +100,7 @@ socket.on('notifyUser', function (user) {
   // 10 seconds after typing stops, set the notify text to an empty string
   setTimeout(function () { $('#notifyUser').text('') }, 10000)
 })
+
 
 
 
