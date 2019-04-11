@@ -5,6 +5,8 @@ const server = http.createServer(app)  // pass in the Express app to our http se
 const io = require('socket.io')(server) // pass in our server to get a Socket.io server
 const path = require('path')
 const dotenv = require('dotenv')
+const passport = require('passport')
+const FacebookStrategy = require('passport-facebook').Strategy;
 
 /*const hostname = '0.0.0.0'    // allows access from remote computers
 const port = 3003;*/
@@ -25,6 +27,10 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // on a GET request to default page, serve up html
 app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, './public/auth.html'))
+})
+
+app.get('/chat', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'))
 })
 
@@ -50,3 +56,43 @@ server.listen(app.get('port'), () => {
   })
 
 module.exports = app
+
+/*  PASSPORT SETUP  */
+
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.get('/success', (req, res) => res.send("You have successfully logged in"));
+app.get('/error', (req, res) => res.send("error logging in"));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user);
+});
+
+passport.deserializeUser(function(obj, cb) {
+  cb(null, obj);
+});
+
+/*  FACEBOOK AUTH  */
+
+const FACEBOOK_APP_ID = '344168129783411';
+const FACEBOOK_APP_SECRET = 'e8cbbef53e7a2488a5baabcef4a3c0b8';
+
+passport.use(new FacebookStrategy({
+    clientID: FACEBOOK_APP_ID,
+    clientSecret: FACEBOOK_APP_SECRET,
+    callbackURL: "/auth/facebook/callback"
+  },
+  function(accessToken, refreshToken, profile, cb) {
+      return cb(null, profile);
+  }
+));
+
+app.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+app.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/error' }),
+  function(req, res) {
+    res.redirect('/chat'); // Was /success
+  });
