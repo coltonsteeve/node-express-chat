@@ -75,8 +75,8 @@ passport.deserializeUser(function(obj, cb) {
 
 /*  FACEBOOK AUTH  */
 
-const FACEBOOK_APP_ID = '344168129783411';
-const FACEBOOK_APP_SECRET = 'e8cbbef53e7a2488a5baabcef4a3c0b8';
+const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
+const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
 
 passport.use(new FacebookStrategy({
     clientID: FACEBOOK_APP_ID,
