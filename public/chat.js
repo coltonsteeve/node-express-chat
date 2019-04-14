@@ -69,7 +69,7 @@ function submitfunction() {
       if (message.includes("watch?v=")) {
         message = message.replace("watch?v=", "embed/");
       }
-      message = '<iframe width="818" height="409" src="' + message + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      message = '<br><iframe id="youtube" width="818" height="409" src="' + message + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
       socket.emit('chatMessage', from, message);
     }
     else {

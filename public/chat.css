@@ -67,7 +67,6 @@ form #button {
   width: 100%;
 }
 
-
 @media screen and (max-width: 600px) {
   /*form {
     height: 8%;
@@ -91,6 +90,11 @@ form #button {
 
   #messages li {
     font-size: 1em;
+  }
+
+  #youtube {
+    height: auto;
+    width: 100%;
   }
 
 
