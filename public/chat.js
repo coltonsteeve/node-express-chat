@@ -64,6 +64,14 @@ function submitfunction() {
       message = '<h1>' + message + '</h1>';
       socket.emit('chatMessage', from, message);
     }
+    else if (message.indexOf("/youtube") == 0) {
+      message = message.substring(8,message.length);
+      if (message.includes("watch?v=")) {
+        message = message.replace("watch?v=", "embed/");
+      }
+      message = '<iframe width="818" height="409" src="' + message + '" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
+      socket.emit('chatMessage', from, message);
+    }
     else {
       socket.emit('chatMessage', from, message);
     }
