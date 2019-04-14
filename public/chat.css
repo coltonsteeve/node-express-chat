@@ -19,9 +19,8 @@ form {
 form input {
   border: 0;
   padding: 10px;
-  margin-right: .5%;
-  margin-left: 0%;
-  width: 95.5%;
+  margin-right: .3em;
+  width: 45em;
   font-size: 100%;
 }
 
@@ -42,7 +41,7 @@ form #button {
   height: 1.9em;
   width: auto;
   bottom: 0;
-  margin-bottom: 2px;
+  margin-bottom: .1em;
   position: fixed;
 }
 
