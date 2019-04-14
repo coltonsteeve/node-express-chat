@@ -3,6 +3,7 @@
 # files that can be re-generated or are specific to a developer should NOT be committed
 
 node_modules/
+.env
 
 # Ignore all .vscode files
 .history/*
