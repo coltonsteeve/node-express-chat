@@ -4,6 +4,8 @@
 
 node_modules/
 
+.env
+
 # Ignore all .vscode files
 .history/*
 .vscode/*
