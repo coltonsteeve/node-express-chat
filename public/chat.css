@@ -4,6 +4,19 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow: scroll;
+  overflow-x: hidden;
+}
+::-webkit-scrollbar {
+  width: 0px;  /* Remove scrollbar space */
+  /*background: transparent;*/  /* Optional: just make scrollbar invisible */
+}
+/* Optional: show position indicator in red */
+/*::-webkit-scrollbar-thumb {
+  background: #FF0000;
+}*/
+
 body {
   font: 1.8em Helvetica, Arial;
 }
@@ -19,9 +32,8 @@ form {
 form input {
   border: 0;
   padding: 10px;
-  margin-right: .5%;
-  margin-left: 0%;
-  width: 95.5%;
+  margin-right: .3em;
+  width: 45em;
   font-size: 100%;
 }
 
@@ -39,10 +51,10 @@ form #button {
   /*padding: 10px;*/
   padding: 0px;
   /*width: 9%;*/
-  height: 8%;
+  height: 1.9em;
   width: auto;
   bottom: 0;
-  margin-bottom: 2px;
+  margin-bottom: .1em;
   position: fixed;
 }
 
@@ -64,10 +76,9 @@ form #button {
 
 #notifyUser {
   position: fixed;
-  bottom: 42px;
+  bottom: 2em;
   width: 100%;
 }
-
 
 @media screen and (max-width: 600px) {
   /*form {
@@ -92,6 +103,11 @@ form #button {
 
   #messages li {
     font-size: 1em;
+  }
+
+  #youtube {
+    height: auto;
+    width: 100%;
   }
 
 
