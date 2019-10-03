@@ -4,18 +4,15 @@
   "description": "Simple Express Chat app",
   "main": "app.js",
   "dependencies": {
-    "body-parser": "^1.18.3",
+    "babel-cli": "^6.26.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
-    "mongoose": "^5.5.1",
-    "passport": "^0.4.0",
-    "passport-facebook": "^3.0.0",
-    "passport-local": "^1.0.0",
     "socket.io": "latest"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node app.js",
+    "build": "babel public/ --out-dir public/js/transpiled && workbox generate:sw"
   },
   "repository": {
     "type": "git",
@@ -31,5 +28,8 @@
     "jQuery"
   ],
   "author": "Denise Case, Colton Steeve",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "workbox-cli": "^4.3.1"
+  }
 }

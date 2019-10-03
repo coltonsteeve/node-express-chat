@@ -5,12 +5,6 @@ const server = http.createServer(app)  // pass in the Express app to our http se
 const io = require('socket.io')(server) // pass in our server to get a Socket.io server
 const path = require('path')
 const dotenv = require('dotenv')
-const passport = require('passport')
-const FacebookStrategy = require('passport-facebook').Strategy;
-const bodyParser = require('body-parser');
-const mongoose = require('mongoose');
-const LocalStrategy = require('passport-local').Strategy;
-
 
 /*const hostname = '0.0.0.0'    // allows access from remote computers
 const port = 3003;*/
@@ -31,10 +25,6 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 // on a GET request to default page, serve up html
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, './public/auth.html'))
-})
-
-app.get('/chat', (req, res) => {
   res.sendFile(path.join(__dirname, './public/index.html'))
 })
 
@@ -59,98 +49,12 @@ server.listen(app.get('port'), () => {
   console.log(' Press CTRL-C to stop\n')
   })
 
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+     navigator.serviceWorker.register('../sw.js').then( () => {
+      console.log('Service Worker Registered')
+     })
+   })
+  }  
+
 module.exports = app
-
-/*  PASSPORT SETUP  */
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-app.get('/success', (req, res) => res.send("You have successfully logged in"));
-app.get('/error', (req, res) => res.send("error logging in"));
-
-passport.serializeUser(function(user, cb) {
-  cb(null, user);
-});
-
-passport.deserializeUser(function(obj, cb) {
-  cb(null, obj);
-});
-
-/*  FACEBOOK AUTH  */
-
-const FACEBOOK_APP_ID = process.env.FACEBOOK_APP_ID;
-const FACEBOOK_APP_SECRET = process.env.FACEBOOK_APP_SECRET;
-
-passport.use(new FacebookStrategy({
-    clientID: FACEBOOK_APP_ID,
-    clientSecret: FACEBOOK_APP_SECRET,
-    callbackURL: "/auth/facebook/callback"
-  },
-  function(accessToken, refreshToken, profile, cb) {
-      return cb(null, profile);
-  }
-));
-
-app.get('/auth/facebook',
-  passport.authenticate('facebook'));
-
-app.get('/auth/facebook/callback',
-  passport.authenticate('facebook', { failureRedirect: '/error' }),
-  function(req, res) {
-    res.redirect('/chat'); // Was /success
-  });
-
-  // Start of Local Passport Authentication
-  app.use(bodyParser.urlencoded({ extended: true }));
-
-  passport.serializeUser(function(user, cb) {
-    cb(null, user.id);
-  });
-  
-  passport.deserializeUser(function(id, cb) {
-    User.findById(id, function(err, user) {
-      cb(err, user);
-    });
-  });
-
-  /* MONGOOSE SETUP */
-
-mongoose.connect('mongodb://localhost/MyDatabase');
-
-const Schema = mongoose.Schema;
-const UserDetail = new Schema({
-      username: String,
-      password: String
-    });
-const UserDetails = mongoose.model('userInfo', UserDetail, 'userInfo');
-
-/* PASSPORT LOCAL AUTHENTICATION */
-
-passport.use(new LocalStrategy(
-  function(username, password, done) {
-      UserDetails.findOne({
-        username: username
-      }, function(err, user) {
-        if (err) {
-          return done(err);
-        }
-
-        if (!user) {
-          return done(null, false);
-        }
-
-        if (user.password != password) {
-          return done(null, false);
-        }
-        return done(null, user);
-      });
-  }
-));
-
-app.post('/',
-  passport.authenticate('local', { failureRedirect: '/error' }),
-  function(req, res) {
-    //res.redirect('/success?username='+req.user.username);
-    res.redirect('/chat');
-  });
