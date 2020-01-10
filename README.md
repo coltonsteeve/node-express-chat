@@ -5,7 +5,7 @@
 
 ## Links
 
-- [Demo](https://denisecase.github.io/node-express-chat/)
+- [Demo](https://radiant-cliffs-16402.herokuapp.com/)
 - [Source](https://github.com/denisecase/node-express-chat)
 
 ## Requirements
